@@ -10,7 +10,13 @@ async function handleGenerateNewShortURL(req,res){
         visitHistory:[],
 
     });
-    return res.json({id:shortId});
+
+    const allurls = await URL.find({});
+
+    return res.render('home', {
+        id: shortId,
+        urls: allurls
+    });
 }
 
 async function handleGetAnalytics(req,res){
