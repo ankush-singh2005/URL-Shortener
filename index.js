@@ -2,10 +2,13 @@ const express=require("express")
 const path = require('path') //we are importing this for using the ejs files.
 const app=express();
 const PORT = 8001;
-const urlRoute = require('./routes/url');
-const staticRoute = require('./routes/staticRouter');
 const mongoose = require('mongoose');
 const URL = require('./models/url');
+
+//calling all routes
+const urlRoute = require('./routes/url');
+const staticRoute = require('./routes/staticRouter');
+const userRoute = require('./routes/user');
 
 mongoose.connect("mongodb://127.0.0.1:27017/url-shortener")
 .then(() => console.log("Connected to MongoDB"))
@@ -21,6 +24,7 @@ app.use(express.urlencoded({extended:false})); // to pass the form data
 
 //routes
 app.use('/url', urlRoute);
+app.use('/user', userRoute);
 app.use('/', staticRoute);
 
 
